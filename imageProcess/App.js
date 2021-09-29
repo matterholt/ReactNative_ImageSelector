@@ -26,28 +26,29 @@
    ReloadInstructions,
  } from 'react-native/Libraries/NewAppScreen';
  
-// import {createAppContainer, createSwitchNavigator}from 'react-navigation'
 
 import {HomeActivity} from './components/pages/HomeActivity';
 import {ViewPhotoActivity} from './components/pages/ViewPhotoActivity';
 
-// const NavigationStackInit = createSwitchNavigator(
-// {
-//   Home: {screen: HomeActivity},
-//   ViewPhotos :{screen: ViewPhotoActivity}
-// },{
-//   initalRouteName:'Home'
-// }
-// )
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
+const Stack = createNativeStackNavigator();
 
-// const NavigationContainer = createAppContainer(NavigationStackInit)
+ const App = () => {
 
+   return (
 
- const App: () => Node = () => {
+    <NavigationContainer>
+      <Stack.Navigator>
 
- 
-   return (<HomeActivity/>)
+        <Stack.Screen name="Home" component={HomeActivity} />
+        <Stack.Screen name="photonview" component={ViewPhotoActivity} />
+
+      </Stack.Navigator>
+    </NavigationContainer>  
+
+   )
  };
  
  const styles = StyleSheet.create({
