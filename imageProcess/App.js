@@ -1,74 +1,27 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
+// In App.js in a new project
 
- import React from 'react';
- import type {Node} from 'react';
- import {
-   SafeAreaView,
-   ScrollView,
-   StatusBar,
-   StyleSheet,
-   Text,
-   useColorScheme,
-   View,
- } from 'react-native';
- 
- import {
-   Colors,
-   DebugInstructions,
-   Header,
-   LearnMoreLinks,
-   ReloadInstructions,
- } from 'react-native/Libraries/NewAppScreen';
- 
+import * as React from 'react';
+import { View, Text,Button } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import {HomeActivity} from './components/pages/HomeActivity';
 import {ViewPhotoActivity} from './components/pages/ViewPhotoActivity';
 
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 const Stack = createNativeStackNavigator();
 
- const App = () => {
-
-   return (
-
+function App() {
+  return (
     <NavigationContainer>
       <Stack.Navigator>
 
         <Stack.Screen name="Home" component={HomeActivity} />
-        <Stack.Screen name="photonview" component={ViewPhotoActivity} />
+        <Stack.Screen name="Images" component={ViewPhotoActivity} />
 
       </Stack.Navigator>
-    </NavigationContainer>  
+    </NavigationContainer>
+  );
+}
 
-   )
- };
- 
- const styles = StyleSheet.create({
-   sectionContainer: {
-     marginTop: 32,
-     paddingHorizontal: 24,
-   },
-   sectionTitle: {
-     fontSize: 24,
-     fontWeight: '600',
-   },
-   sectionDescription: {
-     marginTop: 8,
-     fontSize: 18,
-     fontWeight: '400',
-   },
-   highlight: {
-     fontWeight: '700',
-   },
- });
- 
- export default App;
- 
+export default App;

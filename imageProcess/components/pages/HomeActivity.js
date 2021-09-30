@@ -2,12 +2,12 @@ import React from 'react';
 import {
     StyleSheet,
     Text,
-    View,
+    View,Button
   } from 'react-native';
   import {ActionSheet, Root} from 'native-base';
 // import ImagePicker from "react-native-image-crop-picker";
 
-export const HomeActivity =()=> {
+export const HomeActivity =({ navigation })=> {
 
   function selectImages(){
     const buttons = ['Camera','Photo Library', 'Cancel']
@@ -34,6 +34,10 @@ export const HomeActivity =()=> {
 
         <View style={styles.container}>
             <Text style={styles.highlight}>HOME PAGE</Text>
+            <Button
+        title="Go to Details"
+        onPress={() => navigation.navigate('Images')}
+      />
             
         </View>
 
