@@ -1,29 +1,25 @@
 import React from 'react';
 import {
-
     StyleSheet,
-    Text,
-    View,
   } from 'react-native';
 
-export const ViewPhotoActivity =()=> {
+  import {ActionButton,PageLayout}from "../index"
+
+export const ViewPhotoActivity =({navigation})=> {
     return(
 
-      <View style={styles.container}>
-            <Text style={styles.highlight}>View Photos PAGE</Text>
-        </View>
+      <PageLayout>
+        <ActionButton
+          textInput ="Back Home"
+          toNavigate ="Home"
+          navigation={navigation}
+        />
+        </PageLayout>
  
     )
 }
 
 
 const styles = StyleSheet.create({
-    highlight: {
-      fontWeight: '700',
-    },
-    container:{
-      flex:1,
-      justifyContent:"center",
-      alignItems:"center"
-    }
+
   });

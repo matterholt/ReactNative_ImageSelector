@@ -6,6 +6,8 @@ import {
   } from 'react-native';
   import {ActionSheet, Root} from 'native-base';
 // import ImagePicker from "react-native-image-crop-picker";
+import {ActionButton,PageLayout}from "../index"
+
 
 export const HomeActivity =({ navigation })=> {
 
@@ -30,29 +32,18 @@ export const HomeActivity =({ navigation })=> {
       }
     )
   }
-    return(
-
-        <View style={styles.container}>
-            <Text style={styles.highlight}>HOME PAGE</Text>
-            <Button
-        title="Go to Details"
-        onPress={() => navigation.navigate('Images')}
+  return(
+    <PageLayout>
+      <ActionButton
+        textInput ="View Images"
+        toNavigate ="Images"
+        navigation={navigation}
       />
-            
-        </View>
+      </PageLayout>
 
- 
-    )
+  )
 }
 
 
 const styles = StyleSheet.create({
-    highlight: {
-      fontWeight: '700',
-    },
-    container:{
-      flex:1,
-      justifyContent:"center",
-      alignItems:"center"
-    }
   });
