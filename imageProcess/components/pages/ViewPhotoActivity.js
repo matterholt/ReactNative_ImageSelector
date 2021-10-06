@@ -62,11 +62,6 @@ export const ViewPhotoActivity =({route,navigation})=> {
           />
           </SafeAreaView>
         </View>
-        <ActionButton
-          textInput ="Back Home"
-          toNavigate ="Home"
-          navigation={navigation}
-        />
         </PageLayout>
  
     )
