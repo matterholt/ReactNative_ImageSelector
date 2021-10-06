@@ -30,6 +30,27 @@ export const HomeActivity =({ navigation })=> {
       });
   }
 
+
+  function  choosePhotosFromGallery() {
+    ImagePicker.openPicker({
+        width: 300,
+        height: 200,
+        multiple: true,
+    })
+        .then(images => {
+            console.log(images)
+            if (images.length > 0) {
+                this.navigateToViewPhotos(images);
+            }
+        })
+        .catch(err => {
+            console.log(' Error fetching images from gallery ', err);
+        }
+        )
+      }
+  
+
+
   const { isOpen, onOpen, onClose } = useDisclose()
   return (
     <>
@@ -37,7 +58,7 @@ export const HomeActivity =({ navigation })=> {
       <Actionsheet isOpen={isOpen} onClose={onClose}>
         <Actionsheet.Content>
           <Actionsheet.Item onPress={takePhotoFromCamera}>takePhotoFromCamera</Actionsheet.Item>
-          <Actionsheet.Item>choosePhotosFromGallery</Actionsheet.Item>
+          <Actionsheet.Item onPress={takePhotoFromCamera}>choosePhotosFromGallery</Actionsheet.Item>
         </Actionsheet.Content>
       </Actionsheet>
     </>
