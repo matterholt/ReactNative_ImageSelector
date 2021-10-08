@@ -72,6 +72,7 @@ import {
           <Actionsheet.Item onPress={choosePhotosFromGallery}>choosePhotosFromGallery</Actionsheet.Item>
         </Actionsheet.Content>
       </Actionsheet>
+      
     </>
   )
 }

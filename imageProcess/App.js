@@ -7,6 +7,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import {HomeActivity} from './components/pages/HomeActivity';
 import {ViewPhotoActivity} from './components/pages/ViewPhotoActivity';
+import {TextInImages} from './components/pages/TextInImages'
 
 import { NativeBaseProvider} from 'native-base';
 
@@ -20,7 +21,8 @@ function App() {
 
         <Stack.Screen name="Home" component={HomeActivity} />
         <Stack.Screen name="Images" component={ViewPhotoActivity} />
-
+        <Stack.Screen name="FindText" component={TextInImages} />
+        
       </Stack.Navigator>
       </NativeBaseProvider>
     </NavigationContainer>
