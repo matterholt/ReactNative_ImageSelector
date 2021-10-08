@@ -1,10 +1,11 @@
 import React,{useEffect, useState} from 'react';
+import TextRecognition from 'react-native-text-recognition';
 
 import {
     StyleSheet,Text,
       View,
       Platform,
-      FlatList,
+      FlatList,Button,
       Image,SafeAreaView,
   } from 'react-native';
 
@@ -12,7 +13,29 @@ import {
 
 export const ViewPhotoActivity =({route,navigation})=> {
   const [selectedImages, setSelectedImages] = useState()
+  const [imageText, setImageText] = useState()
   const { data } = route.params;
+
+
+  function processIamgeText(imageFilePath){
+    // new on JS ability to have top level async
+    console.log("convert image to text")
+
+    async function  textifyImage(){
+      try{
+    const result = await TextRecognition.recognize(imageFilePath);
+    console.log(result)
+    // setImageText(result)
+  }catch(error){
+    console.error(error)
+  }
+
+
+}
+  textifyImage()
+
+
+}
 
 
 
@@ -46,15 +69,23 @@ export const ViewPhotoActivity =({route,navigation})=> {
         <SafeAreaView>
           <FlatList
             data={selectedImages}
-            renderItem={({item}) =>{ return(
+            renderItem={({item}) =>{ 
+              const path = item.filePath
+              return(
               <View>
               <Text>{item.fileName}</Text>
+              <Text>{}</Text>
               <Image
               style={{    width: 166,
                 height: 158,}}
                   source={{
                     uri: item.filePath
                   }}
+                />
+                <Button
+                onPress={(path)=>processIamgeText(path)}
+                title="text search"
+                color="#841584"
                 />
               </View>
           )}}
