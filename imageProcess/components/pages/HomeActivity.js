@@ -6,7 +6,7 @@ import {
   } from 'react-native';
   import { 
      Button,
-     Actionsheet,
+     Actionsheet,Center,
      useDisclose} from 'native-base';
      import ImagePicker from "react-native-image-crop-picker";
      
@@ -62,7 +62,7 @@ import {
 
 
   return (
-    <>
+    <Center>
       <Button onPress={onOpen}>Actionsheet</Button>
 
 
@@ -73,7 +73,7 @@ import {
         </Actionsheet.Content>
       </Actionsheet>
       
-    </>
+    </Center>
   )
 }
 

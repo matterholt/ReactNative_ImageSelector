@@ -1,15 +1,17 @@
 import React,{useEffect, useState} from 'react';
-import TextRecognition from 'react-native-text-recognition';
 
+import { Button} from 'native-base';
 import {
     StyleSheet,Text,
       View,
       Platform,
-      FlatList,Button,
+      FlatList,
       Image,SafeAreaView,
   } from 'react-native';
 
-  import {ActionButton,PageLayout}from "../index"
+  import {PageLayout}from "../blocks"
+
+
 
 export const ViewPhotoActivity =({route,navigation})=> {
   const [selectedImages, setSelectedImages] = useState()
@@ -17,7 +19,12 @@ export const ViewPhotoActivity =({route,navigation})=> {
 
 
   function navToPhotosText(selectedImage){
-    navigation.navigate('FindText', {
+    navigation.navigate('Find Text', {
+     selectedImage
+    });
+  }
+  function navToRawText(selectedImage){
+    navigation.navigate('Raw OCR Text', {
      selectedImage
     });
   }
@@ -55,19 +62,22 @@ export const ViewPhotoActivity =({route,navigation})=> {
 
             renderItem={({item}) =>{ 
               return(
-              <View>
-              <Text>{item.fileName}</Text>
+              <View style={{marginBottom:50}}>
+              <Text style={{textAlign:'center', fontWeight:"700",fontSize:20,marginBottom:10}}>{item.fileName}</Text>
               <Image
-              style={{width: 166,height: 158,}}
+              style={{width: 250,height: 200}}
                   source={{
                     uri: item.filePath
                   }}
                 />
                 <Button
+                style={{marginTop:20}}
                 onPress={()=>navToPhotosText(item)}
-                title="text search"
-                color="#841584"
-                />
+                >Basic OCR</Button>
+                <Button
+                style={{marginTop:10}}
+                onPress={()=>navToRawText(item)}
+                >RAW OCR</Button>
               </View>
 
 

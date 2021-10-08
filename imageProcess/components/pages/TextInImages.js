@@ -1,17 +1,17 @@
 import React,{useState, useEffect} from'react'
+import { Center} from 'native-base';
 import TextRecognition from 'react-native-text-recognition';
-import {
-    StyleSheet,Text,
-      View,
-      Platform,
-      FlatList,Button,
-      Image,SafeAreaView,
-  } from 'react-native';
+
+
+import {ImageHeader,ViewedImage, OCRText} from "../blocks"
 
 
 export const TextInImages =({route,navigation})=>{
     const { selectedImage } = route.params;
-    const [imageText, setImageText] = useState()
+    const {fileName,filePath}= selectedImage
+    const [imageText, setImageText] = useState("")
+
+
 
 
     useEffect(()=>{
@@ -31,16 +31,11 @@ export const TextInImages =({route,navigation})=>{
 
     
     return(
-        <View>
-            <Text>{route.fileName}</Text>
-            <Image
-              style={{width: 166,height: 158,}}
-                  source={{
-                    uri: route.filePath
-                  }}
-                />
-            <Text>{imageText}</Text>
-        </View>
+        <Center>
+            <ImageHeader fileTitle={fileName}/>
+            <ViewedImage imagePath={filePath}/>
+            <OCRText ocrResults={imageText}/>
+        </Center>
 
     )
 

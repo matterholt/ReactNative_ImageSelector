@@ -1,13 +1,14 @@
 // In App.js in a new project
 
 import * as React from 'react';
-import { View, Text,Button } from 'react-native';
+
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import {HomeActivity} from './components/pages/HomeActivity';
 import {ViewPhotoActivity} from './components/pages/ViewPhotoActivity';
 import {TextInImages} from './components/pages/TextInImages'
+import {CompleteOCR} from "./components/pages/CompleteOCR"
 
 import { NativeBaseProvider} from 'native-base';
 
@@ -21,7 +22,9 @@ function App() {
 
         <Stack.Screen name="Home" component={HomeActivity} />
         <Stack.Screen name="Images" component={ViewPhotoActivity} />
-        <Stack.Screen name="FindText" component={TextInImages} />
+        <Stack.Screen name="Find Text" component={TextInImages} />
+        <Stack.Screen name="Raw OCR Text" component={CompleteOCR} />
+
         
       </Stack.Navigator>
       </NativeBaseProvider>
