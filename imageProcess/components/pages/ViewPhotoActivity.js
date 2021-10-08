@@ -17,13 +17,17 @@ export const ViewPhotoActivity =({route,navigation})=> {
   const { data } = route.params;
 
 
-  function processIamgeText(imageFilePath){
+  function processIamgeText(item){
     // new on JS ability to have top level async
-    console.log("convert image to text")
+    const {filePath} = item
+    console.log(`Image filePath
+    ${JSON.stringify(item)}`)
 
     async function  textifyImage(){
       try{
-    const result = await TextRecognition.recognize(imageFilePath);
+    // const result = await TextRecognition.recognize('/private/var/mobile/Containers/Data/Application/F7714AF4-4373-4DB8-AB3C-84AF3CB5E1D4/tmp/react-native-image-crop-picker/DF09B18A-B45C-458E-9880-A164F52FC162.jpg');
+    const result = await TextRecognition.recognize(filePath);
+    
     console.log(result)
     // setImageText(result)
   }catch(error){
@@ -70,7 +74,8 @@ export const ViewPhotoActivity =({route,navigation})=> {
           <FlatList
             data={selectedImages}
             renderItem={({item}) =>{ 
-              const path = item.filePath
+
+
               return(
               <View>
               <Text>{item.fileName}</Text>
@@ -83,11 +88,13 @@ export const ViewPhotoActivity =({route,navigation})=> {
                   }}
                 />
                 <Button
-                onPress={(path)=>processIamgeText(path)}
+                onPress={processIamgeText(item)}
                 title="text search"
                 color="#841584"
                 />
               </View>
+
+
           )}}
           keyExtractor={item => item.id}
           />
