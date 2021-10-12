@@ -47,7 +47,7 @@ import {
         multiple: true,
     })
         .then(images => {
-            console.log(images)
+            // console.log(images)
             if (images.length > 0) {
               navToSelectedPhotos(images);
             }
