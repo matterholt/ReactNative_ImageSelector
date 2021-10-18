@@ -114,7 +114,6 @@
 				A7B3462EB1D4BFC9BCBBC854 /* Pods-nativeCamera-nativeCameraTests.debug.xcconfig */,
 				75D37593DA5924556C407CF0 /* Pods-nativeCamera-nativeCameraTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -485,6 +484,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = A6YT8849GA;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = nativeCamera/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -511,6 +511,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = A6YT8849GA;
 				INFOPLIST_FILE = nativeCamera/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
