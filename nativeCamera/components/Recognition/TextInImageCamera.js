@@ -16,7 +16,7 @@ import {
 import { RNCamera } from 'react-native-camera';
 // eslint-disable-next-line
 import renderTextBlocks from './RenderText'
-
+import RNFS from 'react-native-fs'
 
 import { useCamera } from 'react-native-camera-hooks';
 
@@ -34,6 +34,8 @@ const EnableLiveText = ({canDetectText,toggleCameraState})=>{
   )
 }
 
+
+// TODO -> inorder to move file need permisson. 
 
 const TextInImageCamera = ({initialState}) => {
     const [
@@ -74,7 +76,17 @@ const TextInImageCamera = ({initialState}) => {
       const snapThePic = async()=>{
         try {
           const data = await takePicture()
-          console.log(JSON.stringify(data.uri))
+          const currentLocFile = data.uri
+          const newLocFile = RNFS.ExternalDirectoryPath + "test.jpg"
+          RNFS.moveFile(currentLocFile, newLocFile)
+          .then(()=>{
+            console.log('image moved', newLocFile)
+          }).catch(error=>{
+            console.log('image moved', error)
+
+          })
+          
+
         } catch (error) {
           console.log(`ERROR !!! ${error}`)
           
