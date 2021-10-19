@@ -2,8 +2,8 @@ import React from 'react';
 import { NativeBaseProvider, Text, Box,Button ,Center} from 'native-base';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { useIsFocused } from '@react-navigation/core';
 import TextInImageCamera from './components/Recognition/TextInImageCamera'
+import PhotoReview from './components/Photo/PhotoReview'
 
 
 const HomeScreen = ()=>{
@@ -39,8 +39,7 @@ const App= () => {
       <Tab.Navigator>
         <Tab.Screen name="home" component={HomeScreen} />
         <Tab.Screen name="Text Image" component={TextInImage} />
-
-
+        <Tab.Screen name="PhotoReview" component={PhotoReview} />
       </Tab.Navigator>
     </NativeBaseProvider>
   </NavigationContainer>

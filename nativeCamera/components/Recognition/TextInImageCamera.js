@@ -2,6 +2,7 @@
    
 /* eslint-disable no-console */
 import React, { useMemo } from 'react';
+import { Box, Button ,Center} from 'native-base';
 import {
   StyleSheet,
   Text,
@@ -14,36 +15,26 @@ import {
 // eslint-disable-next-line
 import { RNCamera } from 'react-native-camera';
 // eslint-disable-next-line
+import renderTextBlocks from './RenderText'
 
 
 import { useCamera } from 'react-native-camera-hooks';
 
-const renderTextBlocks = (textBlocks = []) => (
-    <View style={styles.facesContainer} pointerEvents="none">
-      {textBlocks.map(renderTextBlock)}
-    </View>
-  );
-  const renderTextBlock = ({ bounds = {}, value }) => (
-    <React.Fragment key={value + bounds.origin.x}>
-      <Text
-        style={[
-          styles.textBlock,
-          { left: bounds.origin.x, top: bounds.origin.y },
-        ]}>
-        {value}
-      </Text>
-      <View
-        style={[
-          styles.text,
-          {
-            ...bounds.size,
-            left: bounds.origin.x,
-            top: bounds.origin.y,
-          },
-        ]}
-      />
-    </React.Fragment>
-  );
+
+const EnableLiveText = ({canDetectText,toggleCameraState})=>{
+  return(
+    <TouchableOpacity
+    onPress={() => toggleCameraState('canDetectText')}
+    style={styles.flipButton}>
+    <Text style={styles.flipText}>
+      {!canDetectText ? 'Detect Text' : 'Detecting Text'}
+    </Text>
+</TouchableOpacity>
+
+  )
+}
+
+
 const TextInImageCamera = ({initialState}) => {
     const [
         {
@@ -56,11 +47,8 @@ const TextInImageCamera = ({initialState}) => {
           whiteBalance,
           autoFocusPoint,
           drawFocusRingPosition,
-          barcodes,
           ratio,
           cameraState,
-          isRecording,
-          faces,
           textBlocks,
         },
         {
@@ -71,19 +59,29 @@ const TextInImageCamera = ({initialState}) => {
           toggleWB,
           touchToFocus,
           toggleCameraState,
-          facesDetected,
           textRecognized,
           barcodeRecognized,
           zoomIn,
           zoomOut,
-          setIsRecording,
           takePicture,
-          recordVideo,
         },
       ] = useCamera(initialState);
       const canDetectText = useMemo(() => cameraState['canDetectText'], [
         cameraState,
       ]);
+
+
+      const snapThePic = async()=>{
+        try {
+          const data = await takePicture()
+          console.log(JSON.stringify(data.uri))
+        } catch (error) {
+          console.log(`ERROR !!! ${error}`)
+          
+        }
+
+
+      }
 
 
   
@@ -113,16 +111,19 @@ const TextInImageCamera = ({initialState}) => {
         {!!canDetectText && renderTextBlocks(textBlocks)}
 
 
-        <TouchableOpacity
-              onPress={() => toggleCameraState('canDetectText')}
-              style={styles.flipButton}>
-              <Text style={styles.flipText}>
-                {!canDetectText ? 'Detect Text' : 'Detecting Text'}
-              </Text>
-            </TouchableOpacity>
 
 
         </RNCamera>
+
+        <EnableLiveText
+        canDetectText={canDetectText}
+        toggleCameraState={toggleCameraState}
+        />
+        <Button onPress={() => snapThePic()}>
+        <Box bg="#fff" alignItems="center" justifyContent="center">
+        <Text>Capture image</Text>
+      </Box>
+        </Button>
 
       </View>
     );
