@@ -18,18 +18,6 @@ const HomeScreen = ()=>{
 }
 
 
-
-const TextInImage = ()=>{
-  // const isFocused = useIsFocused();
-  // if (hasCameraPermission === false) {
-  //   return <Text>No access to camera</Text>;
-  // } else if (hasCameraPermission !== null && isFocused) {
-    return (<TextInImageCamera />)
-  // } else {
-  //   return null;
-  // }
-
-}
 const Tab = createBottomTabNavigator();
 
 const App= () => {
@@ -38,7 +26,7 @@ const App= () => {
     <NativeBaseProvider>
       <Tab.Navigator>
         <Tab.Screen name="home" component={HomeScreen} />
-        <Tab.Screen name="Text Image" component={TextInImage} />
+        <Tab.Screen name="Text Image" component={TextInImageCamera} />
         <Tab.Screen name="PhotoReview" component={PhotoReview} />
       </Tab.Navigator>
     </NativeBaseProvider>

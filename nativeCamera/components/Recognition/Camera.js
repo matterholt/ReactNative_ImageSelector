@@ -68,6 +68,8 @@ const Camera = ({initialState, setCapturedImage,setCapturedText}) => {
           takePicture,
         },
       ] = useCamera(initialState);
+
+
       const canDetectText = useMemo(() => cameraState['canDetectText'], [
         cameraState,
       ]);
@@ -77,9 +79,10 @@ const Camera = ({initialState, setCapturedImage,setCapturedText}) => {
         try {
           const data = await takePicture()
           const currentLocFile = data.uri
+          const text = textBlocks.map(x => x.value)
           setCapturedImage(currentLocFile)
-          console.log(textBlocks)
-          setCapturedText(textBlocks)
+          console.log(text)
+          setCapturedText(text)
           // const newLocFile = RNFS.ExternalDirectoryPath + "test.jpg"
           // RNFS.moveFile(currentLocFile, newLocFile)
           // .then(()=>{
@@ -120,12 +123,8 @@ const Camera = ({initialState, setCapturedImage,setCapturedText}) => {
           'We need your permission to use your camera phone'
         }
 
-  
         onTextRecognized={canDetectText ? textRecognized : null}>
         {!!canDetectText && renderTextBlocks(textBlocks)}
-
-
-
 
         </RNCamera>
 
