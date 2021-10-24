@@ -24,6 +24,7 @@ const ScreenContainer =({children})=>{
             
         <VStack   space={10}  alignItems="center" w="100%"   mt={10} p={4} >
             <NavButton 
+            selected = {true}
                 title = "Take Picture"
                 navigateTo ={"Take Picture"}
                 navigation={navigation}
