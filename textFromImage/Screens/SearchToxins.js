@@ -1,12 +1,13 @@
-import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import React from 'react';
+import { StyleSheet, Text, View } from 'react-native';
+import { ScreenLayout } from '../Components';
 
-export  function SearchToxins() {
+export function SearchToxins() {
   return (
-    <View>
+    <ScreenLayout>
       <Text>Look for the a toxin in the master list</Text>
-    </View>
-  )
+    </ScreenLayout>
+  );
 }
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({});

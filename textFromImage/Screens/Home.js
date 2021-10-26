@@ -14,55 +14,54 @@ import {
   Stack,
 } from 'native-base';
 
-import { NavButton } from '../Components';
+import { NavButton, ScreenLayout } from '../Components';
 
 import { AlbumIcon, CameraIcon, InfoIcon, SearchIcon } from '../Components/SvgComs';
 
-const ScreenContainer = ({ children }) => {
-  return (
-    <Stack space={3} alignItems="center" direction="column">
-      {children}
-    </Stack>
-  );
-};
+const RowStack = ({ children }) => (
+  <HStack space="2xs" alignItems="center" justifyContent="space-evenly">
+    {children}
+  </HStack>
+);
 
 function HomeScreen({ navigation }) {
   return (
-    <ScreenContainer>
+    <ScreenLayout>
       <Heading p="5" my="10">
         Lilly's Ingredient Checker
       </Heading>
-
-      <HStack space={2} alignItems="center">
-        <NavButton
-          selected={true}
-          title="Take Picture"
-          navigateTo={'Take Picture'}
-          navigation={navigation}
-          svgIcon={<CameraIcon />}
-        />
-        <NavButton
-          title="Select Picture"
-          navigateTo={'Select Picture'}
-          navigation={navigation}
-          svgIcon={<AlbumIcon />}
-        />
-      </HStack>
-      <HStack space={2} alignItems="center">
-        <NavButton
-          title="Search Toxins"
-          navigateTo={'Search Toxins'}
-          navigation={navigation}
-          svgIcon={<SearchIcon />}
-        />
-        <NavButton
-          title="App Info"
-          navigateTo={'App Info'}
-          navigation={navigation}
-          svgIcon={<InfoIcon />}
-        />
-      </HStack>
-    </ScreenContainer>
+      <VStack w="100%">
+        <RowStack>
+          <NavButton
+            selected={true}
+            title="Take Picture"
+            navigateTo={'Take Picture'}
+            navigation={navigation}
+            svgIcon={<CameraIcon />}
+          />
+          <NavButton
+            title="Select Picture"
+            navigateTo={'Select Picture'}
+            navigation={navigation}
+            svgIcon={<AlbumIcon />}
+          />
+        </RowStack>
+        <RowStack>
+          <NavButton
+            title="Search Toxins"
+            navigateTo={'Search Toxins'}
+            navigation={navigation}
+            svgIcon={<SearchIcon />}
+          />
+          <NavButton
+            title="App Info"
+            navigateTo={'App Info'}
+            navigation={navigation}
+            svgIcon={<InfoIcon />}
+          />
+        </RowStack>
+      </VStack>
+    </ScreenLayout>
   );
 }
 export { HomeScreen };

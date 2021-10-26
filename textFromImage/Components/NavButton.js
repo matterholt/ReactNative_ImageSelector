@@ -33,19 +33,19 @@ const NavButton = (props) => {
       {({ isFocused, isPressed }) => {
         return (
           <Box
-            bg={isPressed ? 'green.300' : 'white'}
-            m="2"
-            py="5"
+            bg={isPressed ? 'brand.lightColor' : 'white'}
             rounded="8"
+            p="40px"
+            m={5}
             style={{
               transform: [
                 {
-                  scale: isPressed ? 1.2 : 1,
+                  scale: isPressed ? 1 : 0.9,
                 },
               ],
             }}
           >
-            <Flex justify="center" align="center" w="40" h="20">
+            <Flex justify="center" align="center" h="20" w="100">
               {svgIcon}
               <Text mt="5" color="gray.600" fontSize="xs">
                 {title}

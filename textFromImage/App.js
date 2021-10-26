@@ -19,7 +19,7 @@ const theme = extendTheme({
   colors: {
     // Add new color
     brand: {
-      light: 'blue',
+      lightColor: '#D3EFBD',
     },
   },
 });
