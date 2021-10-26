@@ -23,23 +23,31 @@ const ScreenContainer = ({ children }) => {
 function HomeScreen({ navigation }) {
   return (
     <ScreenContainer>
-      <Heading mb={10}>Selct how to find the Toxins</Heading>
-
-      <VStack space={10} alignItems="center" w="100%" mt={10} p={4}>
-        <NavButton
-          selected={true}
-          title="Take Picture"
-          navigateTo={'Take Picture'}
-          navigation={navigation}
-          svgIcon={<AddIcon size="5" mt="0.5" color="primary.500" />}
-        />
-        <NavButton
-          title="Select Picture"
-          navigateTo={'Select Picture'}
-          navigation={navigation}
-          svgIcon={<AddIcon size="5" mt="0.5" color="primary.500" />}
-        />
-      </VStack>
+      <NavButton
+        selected={true}
+        title="Take Picture"
+        navigateTo={'Take Picture'}
+        navigation={navigation}
+        svgIcon={<AddIcon size="5" mt="0.5" color="primary.500" />}
+      />
+      <NavButton
+        title="Select Picture"
+        navigateTo={'Select Picture'}
+        navigation={navigation}
+        svgIcon={<AddIcon size="5" mt="0.5" color="primary.500" />}
+      />
+      <NavButton
+        title="Search Toxins"
+        navigateTo={'Search Toxins'}
+        navigation={navigation}
+        svgIcon={<AddIcon size="5" mt="0.5" color="primary.500" />}
+      />
+      <NavButton
+        title="App Info"
+        navigateTo={'App Info'}
+        navigation={navigation}
+        svgIcon={<AddIcon size="5" mt="0.5" color="primary.500" />}
+      />
     </ScreenContainer>
   );
 }
