@@ -7,7 +7,7 @@
  */
 
 import React from 'react';
-import { NativeBaseProvider, Center } from 'native-base';
+import { NativeBaseProvider, extendTheme } from 'native-base';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
@@ -15,10 +15,19 @@ import { HomeScreen, TakePicture, SelectPicture, SearchToxins, AppInfo } from '.
 
 const Stack = createNativeStackNavigator();
 
+const theme = extendTheme({
+  colors: {
+    // Add new color
+    brand: {
+      light: 'blue',
+    },
+  },
+});
+
 const App = () => {
   return (
     <NavigationContainer>
-      <NativeBaseProvider>
+      <NativeBaseProvider theme={theme}>
         <Stack.Navigator initialRouteName="Home">
           <Stack.Screen
             name="Home"
