@@ -145,7 +145,6 @@
 				AC548216CBFA77BFF57C27A8 /* Pods-textFromImage-textFromImageTests.debug.xcconfig */,
 				0274501563A19BA4044ECB47 /* Pods-textFromImage-textFromImageTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -485,6 +484,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = A6YT8849GA;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = textFromImage/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -511,6 +511,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = A6YT8849GA;
 				INFOPLIST_FILE = textFromImage/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
