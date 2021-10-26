@@ -1,11 +1,15 @@
 import React from 'react';
-import { Center, Button, Text } from 'native-base';
+import { Box, Button, Center, Container, Text, AddIcon, Icon, Flex, Heading } from 'native-base';
+
 import { ScreenLayout } from '../Components';
 
+import { ImageSectionContainer } from '../Components/ImageSectionContainer';
 export function TakePicture() {
   return (
     <ScreenLayout>
-      <Text>Take Picture and checkout the text in image</Text>
+      <ImageSectionContainer>
+        <Text>Take Picture and checkout the text in image</Text>
+      </ImageSectionContainer>
     </ScreenLayout>
   );
 }

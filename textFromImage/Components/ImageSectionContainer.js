@@ -2,9 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Box, Button, Center, Container, Text, AddIcon, Icon, Flex, Heading } from 'native-base';
 
 import { ScreenLayout, ImageResults } from '../Components';
-import { AlbumSelect } from '../Components/ImageAlbum';
 
-export function SelectPicture() {
+export function ImageSectionContainer({ children }) {
   const [albumImageSelected, setAlbumImageSelected] = useState('');
   const [toxinIngredient, setToxinIngredient] = useState(['cat', 'dog']);
   const [isToxic, setIsToxic] = useState(true);
@@ -32,10 +31,7 @@ export function SelectPicture() {
   return (
     <ScreenLayout>
       <Box m="5" h="300" w="300">
-        <AlbumSelect
-          setAlbumImageSelected={setAlbumImageSelected}
-          albumImageSelected={albumImageSelected}
-        />
+        {children}
       </Box>
 
       {albumImageSelected ? (

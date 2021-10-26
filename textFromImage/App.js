@@ -15,16 +15,17 @@ import { HomeScreen, TakePicture, SelectPicture, SearchToxins, AppInfo } from '.
 
 const Stack = createNativeStackNavigator();
 
-const theme = extendTheme({
-  colors: {
-    // Add new color
-    brand: {
-      lightColor: '#D3EFBD',
-    },
-  },
-});
-
 const App = () => {
+  const theme = extendTheme({
+    colors: {
+      // Add new color
+      brand: {
+        lightColor: '#D3EFBD',
+      },
+    },
+  });
+  const baseColor = theme.colors.brand.lightColor;
+
   return (
     <NavigationContainer>
       <NativeBaseProvider theme={theme}>
@@ -35,9 +36,9 @@ const App = () => {
             options={{
               title: 'Toxin Finder',
               headerStyle: {
-                backgroundColor: '#f4511e',
+                backgroundColor: { baseColor },
               },
-              headerTintColor: '#fff',
+              headerTintColor: '#000',
               headerTitleStyle: {
                 fontWeight: 'bold',
               },

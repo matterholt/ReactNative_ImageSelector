@@ -19,7 +19,7 @@ import { NavButton, ScreenLayout } from '../Components';
 import { AlbumIcon, CameraIcon, InfoIcon, SearchIcon } from '../Components/SvgComs';
 
 const RowStack = ({ children }) => (
-  <HStack space="2xs" alignItems="center" justifyContent="space-evenly">
+  <HStack m="0.5" space="2xs" alignItems="center" justifyContent="space-evenly">
     {children}
   </HStack>
 );
@@ -30,7 +30,7 @@ function HomeScreen({ navigation }) {
       <Heading p="5" my="10">
         Lilly's Ingredient Checker
       </Heading>
-      <VStack w="100%">
+      <VStack mb="100">
         <RowStack>
           <NavButton
             selected={true}

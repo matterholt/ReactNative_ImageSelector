@@ -36,7 +36,6 @@ const NavButton = (props) => {
             bg={isPressed ? 'brand.lightColor' : 'white'}
             rounded="8"
             p="40px"
-            m={5}
             style={{
               transform: [
                 {
