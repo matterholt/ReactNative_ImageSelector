@@ -1,0 +1,18 @@
+{
+  "react native base file set up": {
+    "prefix": "rnbs",
+    "body": [
+      "import React from 'react';",
+      "import { Box, Text } from 'native-base';",
+      "",
+      "export function ${TM_FILENAME_BASE}() {",
+      "  return (",
+      "    < Box >",
+      "      <Text>${1}</Text>",
+      "    </Box >",
+      "  );",
+      "}"
+    ],
+    "description": "react native base file set up"
+  }
+}
