@@ -1,12 +1,17 @@
 import React, { useState, useEffect } from 'react';
 
-import { Box, Button, Center, Container, Text, AddIcon, Icon, Flex, Heading } from 'native-base';
+import { Button, Center, Text } from 'native-base';
 
 import { ScreenLayout, ImageContainer } from '../Components';
-
 import { ImageSectionContainer } from '../Components/ImageSectionContainer';
 
 const toxinIngredient = ['cat', 'dog'];
+/*
+
+
+*/
+
+const CameraSelect = () => {};
 
 export function TakePicture() {
   const [albumImageSelected, setAlbumImageSelected] = useState();
