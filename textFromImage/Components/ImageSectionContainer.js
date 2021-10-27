@@ -3,26 +3,8 @@ import { Box, Button, Center, Container, Text, AddIcon, Icon, Flex, Heading } fr
 
 import { ScreenLayout, ImageResults } from '../Components';
 
-export function ImageSectionContainer({ children }) {
-  const [albumImageSelected, setAlbumImageSelected] = useState('');
-  const [toxinIngredient, setToxinIngredient] = useState(['cat', 'dog']);
-  const [isToxic, setIsToxic] = useState(true);
-  const [extractedIngredients, setExtractedIngredients] = useState([
-    'one',
-    'two',
-    'three',
-    'four',
-    'five',
-    'six',
-    'seven',
-    'eight',
-    'nine',
-    'ten',
-  ]);
-
-  function MakeBad() {
-    setExtractedIngredients([...extractedIngredients, ...toxinIngredient]);
-  }
+export function ImageSectionContainer(props) {
+  const { albumImageSelected, extractedIngredients, isToxic, MakeBad, children } = props;
 
   useEffect(() => {}, []);
 
@@ -30,7 +12,7 @@ export function ImageSectionContainer({ children }) {
 
   return (
     <ScreenLayout>
-      <Box m="5" h="300" w="300">
+      <Box m="5" h="300" w="300" bg="red.100">
         {children}
       </Box>
 
