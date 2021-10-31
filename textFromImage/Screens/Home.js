@@ -1,21 +1,7 @@
 import React from 'react';
-import {
-  Flex,
-  Center,
-  Container,
-  Heading,
-  AddIcon,
-  Spacer,
-  VStack,
-  HStack,
-  Text,
-  Icon,
-  Box,
-  Stack,
-} from 'native-base';
+import { Heading, VStack, HStack } from 'native-base';
 
-import { NavButton, ScreenLayout } from '../Components';
-
+import { NavButton, ScreenLayout } from '../Components/common';
 import { AlbumIcon, CameraIcon, InfoIcon, SearchIcon } from '../Components/SvgComs';
 
 const RowStack = ({ children }) => (

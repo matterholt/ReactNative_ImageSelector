@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Box, Button, Center, Container, Text, AddIcon, Icon, Flex, Heading } from 'native-base';
 
-import { ScreenLayout, ImageResults } from '../Components';
-import { AlbumSelect } from '../Components/ImageAlbum';
+import { ScreenLayout } from '../Components/common';
+import { AlbumSelect, ImageResults } from '../Components/ImageProcessing';
 
 export function SelectPicture() {
   const [albumImageSelected, setAlbumImageSelected] = useState('');
@@ -21,12 +21,6 @@ export function SelectPicture() {
     'ten',
   ]);
 
-  function MakeBad() {
-    setExtractedIngredients([...extractedIngredients, ...toxinIngredient]);
-  }
-
-  useEffect(() => {}, []);
-
   //* The only thing that would be different from the camera screen is the AlbumSelect and posibile a few items
 
   return (
@@ -39,11 +33,7 @@ export function SelectPicture() {
       </Box>
 
       {albumImageSelected ? (
-        <ImageResults
-          extractedIngredients={extractedIngredients}
-          isToxic={isToxic}
-          MakeBad={MakeBad}
-        />
+        <ImageResults extractedIngredients={extractedIngredients} isToxic={isToxic} />
       ) : (
         <Text>Search Personal Album</Text>
       )}

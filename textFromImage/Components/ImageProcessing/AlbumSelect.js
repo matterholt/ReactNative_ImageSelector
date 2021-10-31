@@ -29,21 +29,10 @@ const ImageSelection = ({ setAlbumImageSelected, pickerPicture }) => (
 
 function ViewedImage({ imagePath }) {
   console.log('viewed image for', imagePath);
-  return (
-    <Image
-      source={imagePath}
-      alt="Alternate Text"
-      size="xl"
-      fallbackSource={{
-        uri: 'https://www.w3schools.com/css/img_lights.jpg',
-      }}
-    />
-  );
+  return <Image source={imagePath} alt="Alternate Text" size="xl" />;
 }
 
 export function AlbumSelect({ albumImageSelected, setAlbumImageSelected }) {
-  const [uri, setUri] = React.useState(undefined);
-
   const pickerPicture = () => {
     ImagePicker.openPicker({
       width: 320,
@@ -61,10 +50,9 @@ export function AlbumSelect({ albumImageSelected, setAlbumImageSelected }) {
     <Center w="100%" h="100%" bg="red.100">
       <ImageNavtive imagePath={albumImageSelected} />
       {/* <ImageBase imagePath={albumImageSelected}/> */}
-
       {/* <Text>{albumImageSelected}</Text> */}
 
-      <Button onPress={() => setAlbumImageSelected('')}>Reset</Button>
+      <Button onPress={() => console.log('fond')}>Reset</Button>
     </Center>
   ) : (
     <ImageSelection pickerPicture={pickerPicture} />

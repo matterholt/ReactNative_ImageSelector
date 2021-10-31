@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { ScreenLayout } from '../Components';
+import { ScreenLayout } from '../Components/common';
 
 export function SearchToxins() {
   return (

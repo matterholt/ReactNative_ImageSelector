@@ -13,13 +13,13 @@ const IngredientList = ({ extractedIngredients }) => {
   );
 };
 
-export function ImageResults({ extractedIngredients, isToxic, MakeBad }) {
+export function ImageResults({ extractedIngredients, isToxic }) {
   return (
     <Container>
       <Heading>Found {extractedIngredients.length} indgredients</Heading>
       <IngredientList extractedIngredients={extractedIngredients} />
       {isToxic ? <Text>Product is NG</Text> : <Text>Product is good</Text>}
-      <Button onPress={() => MakeBad()}>Check Ingredients</Button>
+      <Button>Check Ingredients</Button>
     </Container>
   );
 }
