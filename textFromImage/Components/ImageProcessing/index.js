@@ -1,3 +1,3 @@
 export * from './ImageResults';
-export * from './ImageContainer';
-export * from './AlbumSelect';
+export * from './ImagingOCR';
+export * from './NoImageFound';

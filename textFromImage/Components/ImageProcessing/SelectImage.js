@@ -1,9 +1,9 @@
 import React from 'react';
 import { Button, Center, Text, AddIcon } from 'native-base';
 
-export function ImageContainer({ setAlbumImageSelected }) {
+export function SelectImage({ setAlbumImageSelected, pickerPicture }) {
   return (
-    <Button onPress={() => setAlbumImageSelected('Image from Ablum')}>
+    <Button onPress={() => pickerPicture()}>
       <Center w="100%" h="100%">
         <AddIcon m="10" />
         <Text>Select a Picture ...</Text>

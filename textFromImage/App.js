@@ -11,7 +11,13 @@ import { NativeBaseProvider, extendTheme } from 'native-base';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import { HomeScreen, TakePicture, SelectPicture, SearchToxins, AppInfo } from './Screens/index';
+import {
+  HomeScreen,
+  PictureFromCamera,
+  PictureFromAlbum,
+  SearchToxins,
+  AppInfo,
+} from './Screens/index';
 
 const Stack = createNativeStackNavigator();
 
@@ -44,8 +50,8 @@ const App = () => {
               },
             }}
           />
-          <Stack.Screen name="Take Picture" component={TakePicture} />
-          <Stack.Screen name="Select Picture" component={SelectPicture} />
+          <Stack.Screen name="Take Picture" component={PictureFromCamera} />
+          <Stack.Screen name="Select Picture" component={PictureFromAlbum} />
           <Stack.Screen name="Search Toxins" component={SearchToxins} />
           <Stack.Screen name="App Info" component={AppInfo} />
         </Stack.Navigator>

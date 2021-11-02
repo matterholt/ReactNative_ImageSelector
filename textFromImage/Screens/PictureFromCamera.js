@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Button, Center, Container, Text, AddIcon, Icon, Flex, Heading } from 'native-base';
+import { Box } from 'native-base';
+import ImagePicker from 'react-native-image-crop-picker';
 
 import { ScreenLayout } from '../Components/common';
-import { AlbumSelect, ImageResults } from '../Components/ImageProcessing';
+import { ImagingOCR, ImageResults, NoImageFound } from '../Components/ImageProcessing';
 
-export function SelectPicture() {
+export function PictureFromCamera() {
   const [albumImageSelected, setAlbumImageSelected] = useState('');
   const [toxinIngredient, setToxinIngredient] = useState(['cat', 'dog']);
   const [isToxic, setIsToxic] = useState(true);
@@ -21,12 +22,28 @@ export function SelectPicture() {
     'ten',
   ]);
 
-  //* The only thing that would be different from the camera screen is the AlbumSelect and posibile a few items
+  const selectImageFromCamera = () => {
+    ImagePicker.openCamera({
+      width: 300,
+      height: 400,
+      cropping: true,
+      freeStyleCropEnabled: true,
+    })
+      .then((image) => {
+        // need to match
+        setAlbumImageSelected({ h: image.height, w: image.width, path: image.path });
+      })
+      .catch((error) => {
+        // set error and return back to main
+        console.log(error);
+      });
+  };
 
   return (
     <ScreenLayout>
       <Box m="5" h="300" w="300">
-        <AlbumSelect
+        <ImagingOCR
+          pickerPicture={selectImageFromCamera}
           setAlbumImageSelected={setAlbumImageSelected}
           albumImageSelected={albumImageSelected}
         />
@@ -34,9 +51,8 @@ export function SelectPicture() {
 
       {albumImageSelected ? (
         <ImageResults extractedIngredients={extractedIngredients} isToxic={isToxic} />
-      ) : (
-        <Text>Search Personal Album</Text>
-      )}
+      ) : null}
+      <NoImageFound />
     </ScreenLayout>
   );
 }
