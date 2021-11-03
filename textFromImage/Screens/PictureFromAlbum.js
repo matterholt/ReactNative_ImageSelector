@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Button } from 'native-base';
+import { Box, Button, Text } from 'native-base';
 import ImagePicker from 'react-native-image-crop-picker';
+
+import { NativeModules } from 'react-native';
 
 import { ScreenLayout } from '../Components/common';
 import { ImagingOCR, ImageResults, NoImageFound } from '../Components/ImageProcessing';
@@ -40,6 +42,15 @@ export function PictureFromAlbum() {
       });
   };
 
+  function WordsFromImage() {
+    try {
+      let OCRresults = NativeModules.TextOCR.recognize(albumImageSelected.path);
+      setExtractedIngredients(OCRresults);
+    } catch (err) {
+      console.log(`there is an issue ${err}`);
+    }
+  }
+
   return (
     <ScreenLayout>
       <Box m="5" h="300" w="300">
@@ -49,10 +60,12 @@ export function PictureFromAlbum() {
           albumImageSelected={albumImageSelected}
         />
       </Box>
-      {albumImageSelected ? (
+      {/* {albumImageSelected ? (
         <ImageResults extractedIngredients={extractedIngredients} isToxic={isToxic} />
-      ) : null}
+      ) : null} */}
       <NoImageFound />
+      <Text>{JSON.stringify(extractedIngredients)}</Text>
+      <Button onPress={() => WordsFromImage()}>WORDS</Button>
     </ScreenLayout>
   );
 }
