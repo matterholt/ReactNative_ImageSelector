@@ -2,13 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { Box, Button, Text } from 'native-base';
 import ImagePicker from 'react-native-image-crop-picker';
 
-import { NativeModules } from 'react-native';
+import { GenerateWords } from '../Components/GenerateWords';
 
 import { ScreenLayout } from '../Components/common';
 import { ImagingOCR, ImageResults, NoImageFound } from '../Components/ImageProcessing';
 
 export function PictureFromAlbum() {
-  const [albumImageSelected, setAlbumImageSelected] = useState('');
+  const [albumImageSelected, setAlbumImageSelected] = useState(undefined);
   const [isToxic, setIsToxic] = useState(true);
   const [extractedIngredients, setExtractedIngredients] = useState([
     'one',
@@ -31,25 +31,14 @@ export function PictureFromAlbum() {
       freeStyleCropEnabled: true,
     })
       .then((image) => {
-        console.log('Image DATA --->', { h: image.height, w: image.width, path: image.path });
-        // SetUri(image.path);
-        // props.onChange?.(image);
-        setAlbumImageSelected({ h: image.height, w: image.width, path: image.path });
+        console.log(image);
+        setAlbumImageSelected(image);
       })
       .catch((error) => {
         // set error and return back to main
         console.log(error);
       });
   };
-
-  function WordsFromImage() {
-    try {
-      let OCRresults = NativeModules.TextOCR.recognize(albumImageSelected.path);
-      setExtractedIngredients(OCRresults);
-    } catch (err) {
-      console.log(`there is an issue ${err}`);
-    }
-  }
 
   return (
     <ScreenLayout>
@@ -60,12 +49,14 @@ export function PictureFromAlbum() {
           albumImageSelected={albumImageSelected}
         />
       </Box>
-      {/* {albumImageSelected ? (
-        <ImageResults extractedIngredients={extractedIngredients} isToxic={isToxic} />
-      ) : null} */}
+      {albumImageSelected ? (
+        <ImageResults extractedIngredients={extractedIngredients.text.split()} isToxic={isToxic} />
+      ) : null}
       <NoImageFound />
-      <Text>{JSON.stringify(extractedIngredients)}</Text>
-      <Button onPress={() => WordsFromImage()}>WORDS</Button>
+      <GenerateWords
+        imagePath={albumImageSelected}
+        setExtractedIngredients={setExtractedIngredients}
+      />
     </ScreenLayout>
   );
 }
