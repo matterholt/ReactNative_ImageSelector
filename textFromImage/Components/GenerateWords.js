@@ -5,11 +5,11 @@ import { Box, Text, Button } from 'native-base';
 
 export function GenerateWords({ imagePath, setExtractedIngredients }) {
   function WordsFromImage() {
-    // console.log(uri);
     async function FindText() {
-      // const resultFromFile = await MlkitOcr.detectFromFile(path);
       const resultFromUri = await MlkitOcr.detectFromFile(imagePath.path);
-      setExtractedIngredients(resultFromUri);
+      const textOnly = resultFromUri.map((x) => x.text.split(' '));
+
+      setExtractedIngredients(textOnly.flat());
     }
     if (imagePath !== null) {
       FindText().catch((e) => console.log('error', e));
