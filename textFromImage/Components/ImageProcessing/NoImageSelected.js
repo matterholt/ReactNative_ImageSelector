@@ -1,10 +1,10 @@
 import React from 'react';
 import { Box, Button, Center, Container, Text, AddIcon, Icon, Flex, Heading } from 'native-base';
 
-export function NoImageFound() {
+export function NoImageSelected() {
   return (
     <Flex>
-      <Text>Search Personal Album</Text>
+      <Text>Image has not been selected</Text>
     </Flex>
   );
 }

@@ -1,3 +1,3 @@
 export * from './ImageResults';
 export * from './ImagingOCR';
-export * from './NoImageFound';
+export * from './NoImageSelected';
