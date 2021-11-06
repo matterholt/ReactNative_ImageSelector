@@ -27,7 +27,7 @@ const NavButton = (props) => {
   return (
     <Pressable
       onPress={() => {
-        navigation.navigate(navigateTo);
+        navigation.navigate(navigateTo, { image: undefined });
       }}
     >
       {({ isFocused, isPressed }) => {

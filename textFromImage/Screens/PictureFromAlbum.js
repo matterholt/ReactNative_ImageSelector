@@ -2,6 +2,8 @@ import React, { useState, useEffect, useReducer } from 'react';
 import ImagePicker from 'react-native-image-crop-picker';
 import MlkitOcr, { MlkitOcrResult } from 'react-native-mlkit-ocr';
 
+import { useSetStatus } from '../Hooks/useSetStatus';
+
 // UI Componet Library
 import { Box, Button, Text } from 'native-base';
 
@@ -56,10 +58,10 @@ function reducerImageControl(state, action) {
   }
 }
 
-export function PictureFromAlbum() {
+export function PictureFromAlbum({ route }) {
   const [appState, setAppState] = useState(''); // error, loading, results, inital
-  const [wordResultViewState, setWordResultViewState] = useReducer(reducerImageControl, initalView);
-  const [albumImageSelected, setAlbumImageSelected] = useState(undefined);
+  const [wordResultViewState, setWordResultViewState] = useSetStatus();
+  const [albumImageSelected, setAlbumImageSelected] = useState();
   const [isToxic, setIsToxic] = useState(true);
   const [extractedIngredients, setExtractedIngredients] = useState([
     { id: 1, isToxic: true, word: 'Ftech' },
@@ -104,7 +106,6 @@ export function PictureFromAlbum() {
       freeStyleCropEnabled: true,
     })
       .then((image) => {
-        console.log(image);
         setAlbumImageSelected(image);
       })
       .catch((error) => {
@@ -114,8 +115,6 @@ export function PictureFromAlbum() {
   };
 
   useEffect(() => {
-    console.log('use effect should not be');
-    setWordResultViewState({ type: 'loading' });
     async function FindText() {
       const resultFromUri = await MlkitOcr.detectFromFile(albumImageSelected.path);
       const textOnly = resultFromUri.map((x) => x.text.split(' ')).flat();
@@ -124,19 +123,37 @@ export function PictureFromAlbum() {
       }
       setWordResultViewState({ type: 'notFound' });
     }
-    FindText().catch((e) => setWordResultViewState({ type: 'error' }));
-    setWordResultViewState({ type: 'showResults' });
+    if (!route) {
+      setAlbumImageSelected(undefined);
+    } else {
+      setAlbumImageSelected(route.params.image);
+      FindText();
+    }
+    // console.log('use effect should not be');
+    // setWordResultViewState({ type: 'loading' });
+    // async function FindText() {
+    //   const resultFromUri = await MlkitOcr.detectFromFile(albumImageSelected.path);
+    //   const textOnly = resultFromUri.map((x) => x.text.split(' ')).flat();
+    //   if (textOnly !== []) {
+    //     setExtractedIngredients(textOnly);
+    //   }
+    //   setWordResultViewState({ type: 'notFound' });
+    // }
+    // FindText().catch((e) => setWordResultViewState({ type: 'error' }));
+    // setWordResultViewState({ type: 'showResults' });
   }, []);
 
   return (
     <ScreenLayout>
       <Box m="5" h="300" w="300">
+        {/* <Text>THERE SHOULD BE{JSON.stringify(albumImageSelected)}</Text> */}
         <ImagingOCR
           pickerPicture={selectImageFromAlbum}
           setAlbumImageSelected={setAlbumImageSelected}
           albumImageSelected={albumImageSelected}
         />
       </Box>
+      <Text>{wordResultViewState}</Text>
       <ControlWordsFoundInImage
         wordResultViewState={wordResultViewState}
         setWordResultViewState={setWordResultViewState}
