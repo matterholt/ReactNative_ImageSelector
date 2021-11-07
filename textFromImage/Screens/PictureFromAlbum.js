@@ -8,7 +8,7 @@ import { useSetStatus } from '../Hooks/useSetStatus';
 import { Box, Button, Text } from 'native-base';
 
 // Components
-import { ScreenLayout } from '../Components/common';
+import { ScreenLayout, LoadingStatus } from '../Components/common';
 import { ImagingOCR, ImageResults, NoImageSelected } from '../Components/ImageProcessing';
 
 const ControlWordsFoundInImage = ({
@@ -22,7 +22,7 @@ const ControlWordsFoundInImage = ({
   if (wordResultViewState.status == 'error') {
     return (
       <Text>
-        Error, yeah try another picture{' '}
+        Error, yeah try another picture
         <Button onPress={() => setWordResultViewState({ type: 'inital' })}>RESET</Button>
       </Text>
     );
@@ -33,36 +33,17 @@ const ControlWordsFoundInImage = ({
   if (wordResultViewState.status == 'notFound') {
     return <Text>No words found in images, try again</Text>;
   }
-  if (wordResultViewState.status == 'inital') {
+  if (wordResultViewState.status == 'noImage') {
     return <NoImageSelected />;
   }
   return null;
 };
 
-// image control hook useReducer
-const initalView = 'inital';
-function reducerImageControl(state, action) {
-  switch (action.type) {
-    case 'inital':
-      return { status: 'intal' };
-    case 'error':
-      return { status: 'error' };
-    case 'showResults':
-      return { status: 'showResults' };
-    case 'notFound':
-      return { status: 'notFound' };
-    case 'loading':
-      return { status: 'loading' };
-    default:
-      throw new Error();
-  }
-}
-
-export function PictureFromAlbum({ route }) {
-  const [appState, setAppState] = useState(''); // error, loading, results, inital
+export function PictureFromAlbum({ route, navigation }) {
   const [wordResultViewState, setWordResultViewState] = useSetStatus();
+
   const [albumImageSelected, setAlbumImageSelected] = useState();
-  const [isToxic, setIsToxic] = useState(true);
+
   const [extractedIngredients, setExtractedIngredients] = useState([
     { id: 1, isToxic: true, word: 'Ftech' },
     { id: 2, isToxic: false, word: 'ínc.' },
@@ -107,53 +88,61 @@ export function PictureFromAlbum({ route }) {
     })
       .then((image) => {
         setAlbumImageSelected(image);
+        setWordResultViewState({ type: 'inital' });
       })
       .catch((error) => {
-        // set error and return back to main
-        console.log(error);
+        navigation.navigate('Home');
       });
   };
 
   useEffect(() => {
-    async function FindText() {
-      const resultFromUri = await MlkitOcr.detectFromFile(albumImageSelected.path);
-      const textOnly = resultFromUri.map((x) => x.text.split(' ')).flat();
-      if (textOnly !== []) {
-        setExtractedIngredients(textOnly);
-      }
-      setWordResultViewState({ type: 'notFound' });
-    }
-    if (!route) {
-      setAlbumImageSelected(undefined);
-    } else {
-      setAlbumImageSelected(route.params.image);
-      FindText();
-    }
-    // console.log('use effect should not be');
-    // setWordResultViewState({ type: 'loading' });
-    // async function FindText() {
-    //   const resultFromUri = await MlkitOcr.detectFromFile(albumImageSelected.path);
-    //   const textOnly = resultFromUri.map((x) => x.text.split(' ')).flat();
-    //   if (textOnly !== []) {
-    //     setExtractedIngredients(textOnly);
-    //   }
-    //   setWordResultViewState({ type: 'notFound' });
-    // }
-    // FindText().catch((e) => setWordResultViewState({ type: 'error' }));
-    // setWordResultViewState({ type: 'showResults' });
+    setWordResultViewState({ type: 'loading' });
+    selectImageFromAlbum();
   }, []);
+
+  // useEffect(() => {
+  //   async function FindText() {
+  //     const resultFromUri = await MlkitOcr.detectFromFile(albumImageSelected.path);
+  //     const textOnly = resultFromUri.map((x) => x.text.split(' ')).flat();
+  //     if (textOnly !== []) {
+  //       setExtractedIngredients(textOnly);
+  //     }
+  //     setWordResultViewState({ type: 'notFound' });
+  //   }
+  //   if (!route) {
+  //     setAlbumImageSelected(undefined);
+  //   } else {
+  //     setAlbumImageSelected(route.params.image);
+  //     FindText();
+  //   }
+  //   console.log('use effect should not be');
+  //   setWordResultViewState({ type: 'loading' });
+  //   async function FindText() {
+  //     const resultFromUri = await MlkitOcr.detectFromFile(albumImageSelected.path);
+  //     const textOnly = resultFromUri.map((x) => x.text.split(' ')).flat();
+  //     if (textOnly !== []) {
+  //       setExtractedIngredients(textOnly);
+  //     }
+  //     setWordResultViewState({ type: 'notFound' });
+  //   }
+  //   FindText().catch((e) => setWordResultViewState({ type: 'error' }));
+  //   setWordResultViewState({ type: 'showResults' });
+  // }, []);
+
+  if (wordResultViewState.status === 'loading') {
+    return <LoadingStatus message="Getting things together" />;
+  }
 
   return (
     <ScreenLayout>
       <Box m="5" h="300" w="300">
-        {/* <Text>THERE SHOULD BE{JSON.stringify(albumImageSelected)}</Text> */}
         <ImagingOCR
           pickerPicture={selectImageFromAlbum}
           setAlbumImageSelected={setAlbumImageSelected}
           albumImageSelected={albumImageSelected}
         />
       </Box>
-      <Text>{wordResultViewState}</Text>
+      <Text>{wordResultViewState.status}</Text>
       <ControlWordsFoundInImage
         wordResultViewState={wordResultViewState}
         setWordResultViewState={setWordResultViewState}
