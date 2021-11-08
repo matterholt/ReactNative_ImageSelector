@@ -1,11 +1,10 @@
 import React from 'react';
-import { Box, Heading, Center } from 'native-base';
+import { Spinner, Heading, Center } from 'native-base';
 
-export function LoadingStatus(props) {
-  const { message } = props;
+export function LoadingStatus() {
   return (
     <Center h="100%">
-      <Heading>{message}</Heading>
+      <Spinner accessibilityLabel="Loading posts" size="lg" />
     </Center>
   );
 }

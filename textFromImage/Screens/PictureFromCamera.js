@@ -3,7 +3,7 @@ import { Box } from 'native-base';
 import ImagePicker from 'react-native-image-crop-picker';
 
 import { ScreenLayout } from '../Components/common';
-import { ImagingOCR, ImageResults, NoImageFound } from '../Components/ImageProcessing';
+import { ImageContainer, OCRResults, NoImageFound } from '../Components/ImageProcessing';
 
 export function PictureFromCamera() {
   const [albumImageSelected, setAlbumImageSelected] = useState('');
@@ -42,7 +42,7 @@ export function PictureFromCamera() {
   return (
     <ScreenLayout>
       <Box m="5" h="300" w="300">
-        <ImagingOCR
+        <ImageContainer
           pickerPicture={selectImageFromCamera}
           setAlbumImageSelected={setAlbumImageSelected}
           albumImageSelected={albumImageSelected}
@@ -50,7 +50,7 @@ export function PictureFromCamera() {
       </Box>
 
       {albumImageSelected ? (
-        <ImageResults extractedIngredients={extractedIngredients} isToxic={isToxic} />
+        <OCRResults extractedIngredients={extractedIngredients} isToxic={isToxic} />
       ) : null}
       <NoImageFound />
     </ScreenLayout>

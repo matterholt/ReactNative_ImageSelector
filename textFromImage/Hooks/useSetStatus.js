@@ -1,13 +1,13 @@
 import React, { useState, useEffect, useReducer } from 'react';
 
 // image control hook useReducer
-const initalView = 'inital';
+
 function reducerImageControl(state, action) {
   switch (action.type) {
     case 'inital':
       return { status: 'intal' };
     case 'error':
-      return { status: 'error' };
+      return { status: 'error', message: action.message };
     case 'showResults':
       return { status: 'showResults' };
     case 'notFound':
@@ -19,8 +19,9 @@ function reducerImageControl(state, action) {
   }
 }
 
-function useSetStatus(actionType) {
-  const [componentStatus, setcomponentStatus] = useReducer(reducerImageControl, initalView);
+const intial = { status: 'inital' };
+function useSetStatus() {
+  const [componentStatus, setcomponentStatus] = useReducer(reducerImageControl, intial);
 
   useEffect(() => {});
   return [componentStatus, setcomponentStatus];

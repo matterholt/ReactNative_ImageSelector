@@ -6,6 +6,8 @@
   },
   "extends": [
     "plugin:react/recommended",
+    "plugin:react-hooks/recommended",
+    "plugin: eslint-plugin-react-hooks",
     "airbnb",
     "react-native",
     "airbnb/hooks",
@@ -16,7 +18,7 @@
     "ecmaFeatures": {
       "jsx": true
     },
-    "ecmaVersion": 13
+    "ecmaVersion": 12
   },
   "plugins": ["react"],
   "rules": {

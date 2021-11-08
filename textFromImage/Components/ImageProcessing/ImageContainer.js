@@ -2,9 +2,9 @@ import React from 'react';
 import { SelectImage } from './SelectImage';
 import { ImageDisplay } from './ImageDisplay';
 
-export function ImagingOCR({ albumImageSelected, setAlbumImageSelected, pickerPicture }) {
-  return albumImageSelected ? (
-    <ImageDisplay imagePath={albumImageSelected} />
+export function ImageContainer({ selectedImage, pickerPicture }) {
+  return selectedImage ? (
+    <ImageDisplay selectedImage={selectedImage} />
   ) : (
     <SelectImage pickerPicture={pickerPicture} />
   );
