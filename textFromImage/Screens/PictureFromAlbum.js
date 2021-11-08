@@ -4,7 +4,7 @@ import ImagePicker from 'react-native-image-crop-picker';
 import { useSetStatus } from '../Hooks/useSetStatus';
 
 // UI Componet Library
-import { Box, Button, Text } from 'native-base';
+import { Box, Button, Text, ScrollView } from 'native-base';
 
 // Components
 import { ScreenLayout, LoadingStatus } from '../Components/common';
@@ -61,12 +61,12 @@ export function PictureFromAlbum({ route, navigation }) {
   }
   if (selectedImage.status == 'showResults') {
     return (
-      <ScreenLayout>
+      <ScrollView>
         <Box m="5" h="300" w="300">
           <ImageContainer selectedImage={albumImageSelected} pickerPicture={resetImage} />
         </Box>
         <OCRResults selectedImagePath={albumImageSelected.path} reset={resetImage} />
-      </ScreenLayout>
+      </ScrollView>
     );
   }
   return null;

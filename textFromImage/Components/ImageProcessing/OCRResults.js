@@ -1,101 +1,20 @@
 import React, { useState } from 'react';
 import { useSetStatus } from '../../Hooks/useSetStatus';
 import { LoadingStatus } from '../common';
+import { WordContainer } from './WordContainer';
 import MlkitOcr from 'react-native-mlkit-ocr';
-import {
-  Box,
-  Button,
-  HStack,
-  Container,
-  Text,
-  AddIcon,
-  Icon,
-  Flex,
-  Center,
-  Heading,
-  FlatList,
-} from 'native-base';
-const TEMPRESULTS = [
-  { id: 1, isToxic: true, word: 'Ftech' },
-  { id: 2, isToxic: false, word: 'ínc.' },
-  { id: 3, isToxic: true, word: 'Corporate' },
-  { id: 4, isToxic: false, word: 'Slogan' },
-  { id: 5, isToxic: false, word: 'Better' },
-  { id: 6, isToxic: false, word: 'than' },
-  { id: 7, isToxic: false, word: 'Ever.' },
-  { id: 8, isToxic: false, word: '14th' },
-  { id: 9, isToxic: false, word: 'Midterm' },
-  { id: 10, isToxic: false, word: 'Business' },
-  { id: 11, isToxic: false, word: 'Plan' },
-  { id: 12, isToxic: false, word: 'Plan11' },
-  { id: 13, isToxic: false, word: '~Basic' },
-  { id: 14, isToxic: false, word: 'Policy~' },
-  { id: 15, isToxic: false, word: "Let's" },
-  { id: 16, isToxic: false, word: 'exceed' },
-  { id: 17, isToxic: true, word: 'our' },
-  { id: 18, isToxic: false, word: 'limits!' },
-  { id: 19, isToxic: true, word: 'We' },
-  { id: 20, isToxic: false, word: 'will,' },
-  { id: 21, isToxic: false, word: 'without' },
-  { id: 22, isToxic: false, word: 'compromise,' },
-  { id: 23, isToxic: false, word: 'produce' },
-  { id: 24, isToxic: false, word: 'the' },
-  { id: 25, isToxic: false, word: 'Best' },
-  { id: 26, isToxic: false, word: 'One"' },
-  { id: 27, isToxic: false, word: 'ior' },
-  { id: 28, isToxic: false, word: 'all' },
-  { id: 29, isToxic: false, word: 'our' },
-  { id: 30, isToxic: false, word: 'customers' },
-];
+import { Box, Button, HStack, Container, Text, Center, Heading, FlatList } from 'native-base';
 
-const WordList = ({ data }) => {
-  return (
-    <FlatList
-      w="100%"
-      data={data}
-      renderItem={({ item }) => (
-        <Box
-          borderBottomWidth="1"
-          _dark={{
-            borderColor: 'gray.600',
-          }}
-          borderColor="coolGray.200"
-          pl="4"
-          pr="5"
-          py="2"
-        >
-          <HStack space={3} justifyContent="space-between">
-            <Text
-              _dark={{
-                color: 'warmGray.100',
-              }}
-              color="coolGray.900"
-              bold
-            >
-              {item.word}
-            </Text>
-            <Text
-              _dark={{
-                color: 'warmGray.100',
-              }}
-              color="coolGray.500"
-              bold
-            >
-              {item.isToxic ? 'TOXIC' : 'OK'}
-            </Text>
-          </HStack>
-        </Box>
-      )}
-      keyExtractor={(item) => item.id}
-    />
-  );
-};
+const WORD_NG_TOXIC = ['write', 'text'];
+
+const WordList = () => {};
 
 export function OCRResults({ selectedImagePath, reset, navigation }) {
   const [imageOCR, setImageOCR] = useSetStatus();
   const [extractedIngredients, setExtractedIngredients] = useState([]);
 
   const findWords = () => {
+    //todo Improve funciton clean code up
     async function FindText() {
       const resultFromUri = await MlkitOcr.detectFromFile(selectedImagePath);
       const textOnly = resultFromUri.map((x) => x.text.split(' ')).flat();
@@ -104,10 +23,12 @@ export function OCRResults({ selectedImagePath, reset, navigation }) {
         setImageOCR({ type: 'notFound' });
       } else {
         const wordAnalysis = await textOnly.map((x, y) => {
+          const toxicIngredient = WORD_NG_TOXIC.find((word) => word.toUpperCase() === x);
+
           return {
             id: y,
             word: x,
-            isToxic: false,
+            isToxic: toxicIngredient ? true : false,
           };
         });
         setExtractedIngredients(wordAnalysis);
@@ -174,10 +95,9 @@ export function OCRResults({ selectedImagePath, reset, navigation }) {
     return (
       <Container w="100%">
         <Heading>Found {extractedIngredients.length} indgredients</Heading>
-        {imageOCR.status}
-        <WordList data={extractedIngredients} />
+        <WordContainer data={extractedIngredients} />
       </Container>
     );
   }
-  return <Text>{JSON.stringify(imageOCR)}</Text>;
+  return null;
 }
