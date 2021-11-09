@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSetStatus } from '../../Hooks/useSetStatus';
 import { LoadingStatus } from '../common';
 import { WordContainer } from './WordContainer';
@@ -46,28 +46,9 @@ export function OCRResults({ selectedImagePath, reset, navigation }) {
 
   //* Once component is mounted then should have an image selected and woudl be able to check if has words
 
-  // useEffect(() => {
-  //   async function FindText() {
-  //     const resultFromUri = await MlkitOcr.detectFromFile(albumImageSelected.path);
-  //     const textOnly = resultFromUri.map((x) => x.text.split(' ')).flat();
-  //     if (textOnly !== []) {
-  //       setExtractedIngredients(textOnly);
-  //     }
-  //     setImageOCR({ type: 'notFound' });
-  //   }
-
-  //   if (!route) {
-  //     setAlbumImageSelected(undefined);
-  //   } else {
-  //     setAlbumImageSelected(route.params.image);
-  //     FindText();
-  //   }
-  //   console.log('use effect should not be');
-  //   setImageOCR({ type: 'loading' });
-
-  //   FindText().catch((e) => setImageOCR({ type: 'error' }));
-  //   setImageOCR({ type: 'showResults' });
-  // }, []);
+  useEffect(() => {
+    findWords();
+  }, []);
 
   if (imageOCR.status === 'inital') {
     return <Button onPress={() => findWords()}>Find words</Button>;
