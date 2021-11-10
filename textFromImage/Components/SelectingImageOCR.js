@@ -1,43 +1,31 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import ImagePicker from 'react-native-image-crop-picker';
+import React, { useEffect } from 'react';
 
 import { Box, Button, Text, ScrollView } from 'native-base';
 import { useSetStatus } from '../Hooks/useSetStatus';
 
-import { ScreenLayout, LoadingStatus } from '../Components/common';
-import { ImageContainer, OCRResults, NoImageSelected } from '../Components/ImageProcessing';
+// UI Componet Library
+
+// TODO -> album and camera have simular layouts only issue is the function that is called
+//* create a option that can be set in parent and what ever is set determins
+
+// Components
+import { ScreenLayout, LoadingStatus } from './common';
+import { ImageContainer, OCRResults, NoImageSelected } from './ImageProcessing';
+
 // eslint-disable-next-line import/prefer-default-export
-export function PictureFromCamera({ route, navigation }) {
+export function SelectingImageOCR({ imageSelecter, albumImageSelected }) {
   const [selectedImage, setSelectedImage] = useSetStatus({ status: 'inital' });
-  const [albumImageSelected, setAlbumImageSelected] = useState(undefined);
-
-  const selectImageFromCamera = useCallback(() => {
-    ImagePicker.openCamera({
-      width: 420,
-      height: 420,
-
-      scropping: true,
-      freeStyleCropEnabled: true,
-    })
-      .then((image) => {
-        setAlbumImageSelected(image);
-        setSelectedImage({ type: 'showResults' });
-      })
-      .catch(() => {
-        navigation.navigate('Home');
-      });
-  }, [navigation, setSelectedImage]);
 
   useEffect(() => {
     // ? Not sure how to really handle this, only want it to run once on mount.
     setSelectedImage({ type: 'loading' });
-    selectImageFromCamera();
-  }, [selectImageFromCamera, setSelectedImage]);
+    imageSelecter();
+  }, [imageSelecter, setSelectedImage]);
 
   const resetImage = () => {
     // setAlbumImageSelected(undefined);
     setSelectedImage({ type: 'loading' });
-    selectImageFromCamera();
+    imageSelecter();
   };
 
   if (selectedImage.status === 'error') {
