@@ -12,6 +12,7 @@ const RowStack = ({ item }) => (
     pl="4"
     pr="5"
     py="2"
+    w="100%"
   >
     <HStack space={3} justifyContent="space-between">
       <Text

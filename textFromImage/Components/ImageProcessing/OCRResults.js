@@ -74,10 +74,10 @@ export function OCRResults({ selectedImagePath, reset, navigation }) {
   }
   if (imageOCR.status === 'showResults') {
     return (
-      <Container w="100%">
+      <Center w="100%" mb="20">
         <Heading>Found {extractedIngredients.length} indgredients</Heading>
         <WordContainer data={extractedIngredients} />
-      </Container>
+      </Center>
     );
   }
   return null;
