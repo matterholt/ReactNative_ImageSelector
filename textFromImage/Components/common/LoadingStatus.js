@@ -1,5 +1,5 @@
 import React from 'react';
-import { Spinner, Heading, Center } from 'native-base';
+import { Spinner, Center } from 'native-base';
 
 export function LoadingStatus() {
   return (

@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import MlkitOcr from 'react-native-mlkit-ocr';
+import { Button, Container, Text, Center, Heading } from 'native-base';
 import { useSetStatus } from '../../Hooks/useSetStatus';
 import { LoadingStatus } from '../common';
 import { WordContainer } from './WordContainer';
-import MlkitOcr from 'react-native-mlkit-ocr';
-import { Box, Button, HStack, Container, Text, Center, Heading, FlatList } from 'native-base';
 
 const WORD_NG_TOXIC = ['write', 'text'];
 
@@ -14,7 +14,7 @@ export function OCRResults({ selectedImagePath, reset, navigation }) {
   const [extractedIngredients, setExtractedIngredients] = useState([]);
 
   const findWords = () => {
-    //todo Improve funciton clean code up
+    // todo Improve funciton clean code up
     async function FindText() {
       const resultFromUri = await MlkitOcr.detectFromFile(selectedImagePath);
       const textOnly = resultFromUri.map((x) => x.text.split(' ')).flat();
@@ -28,7 +28,7 @@ export function OCRResults({ selectedImagePath, reset, navigation }) {
           return {
             id: y,
             word: x,
-            isToxic: toxicIngredient ? true : false,
+            isToxic: !!toxicIngredient,
           };
         });
         setExtractedIngredients(wordAnalysis);
@@ -53,7 +53,7 @@ export function OCRResults({ selectedImagePath, reset, navigation }) {
   if (imageOCR.status === 'inital') {
     return <Button onPress={() => findWords()}>Find words</Button>;
   }
-  if (imageOCR.status == 'loading') {
+  if (imageOCR.status === 'loading') {
     return <LoadingStatus />;
   }
   if (imageOCR.status === 'error') {

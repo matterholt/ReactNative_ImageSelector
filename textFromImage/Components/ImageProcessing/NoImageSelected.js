@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Button, Center, Container, Text, AddIcon, Icon, Flex, Heading } from 'native-base';
+import { Text, Flex } from 'native-base';
 
 export function NoImageSelected() {
   return (

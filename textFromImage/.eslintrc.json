@@ -7,12 +7,10 @@
   "extends": [
     "plugin:react/recommended",
     "plugin:react-hooks/recommended",
-    "plugin: eslint-plugin-react-hooks",
     "airbnb",
-    "react-native",
+
     "airbnb/hooks",
-    "prettier",
-    "prettier/react"
+    "prettier"
   ],
   "parserOptions": {
     "ecmaFeatures": {
@@ -20,9 +18,10 @@
     },
     "ecmaVersion": 12
   },
-  "plugins": ["react"],
+  "plugins": ["react", "react-native"],
   "rules": {
     // allow .js files to contain JSX code
-    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "import/prefer-default-export": "off"
   }
 }
